@@ -33,7 +33,7 @@ build-docker:
 
 # Run locally (requires dev-infra)
 run:
-	cd backend && go run ./cmd/api
+	cd backend && go mod tidy && go run ./cmd/api
 
 run-worker:
 	cd backend && go run ./cmd/worker

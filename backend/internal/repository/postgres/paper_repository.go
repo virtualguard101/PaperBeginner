@@ -86,7 +86,7 @@ func (r *PaperRepository) FindSimilar(embedding pgvector.Vector, limit int) ([]*
 	var papers []*domain.Paper
 
 	err := r.db.Preload("CCFCategory").
-		Order("embedding <-> ?", embedding).
+		Order(gorm.Expr("embedding <-> ?", embedding)).
 		Limit(limit).
 		Find(&papers).Error
 
