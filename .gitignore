@@ -41,6 +41,7 @@ logs/
 node_modules/
 frontend/dist/
 frontend/.vite/
+frontend/package-lock.json
 .npm
 
 # Build
