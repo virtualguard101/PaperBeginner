@@ -1,0 +1,473 @@
+openapi: 3.0.3
+info:
+  title: PaperBeginer API
+  description: AI-powered Academic Research Guide API
+  version: 1.0.0
+  contact:
+    name: PaperBeginer Team
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Development server
+  - url: https://api.paperbeginer.com/api/v1
+    description: Production server
+
+tags:
+  - name: auth
+    description: Authentication endpoints
+  - name: users
+    description: User management
+  - name: papers
+    description: Paper management and analysis
+  - name: trending
+    description: Trending topics and reports
+  - name: learning
+    description: Learning path generation
+  - name: reviews
+    description: Literature review generation and scoring
+
+paths:
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /users/me:
+    get:
+      tags: [users]
+      summary: Get current user profile
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /papers:
+    get:
+      tags: [papers]
+      summary: List user's papers
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of papers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaperResponse'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+
+  /papers/upload:
+    post:
+      tags: [papers]
+      summary: Upload a paper
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+                - title
+              properties:
+                file:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                authors:
+                  type: string
+                abstract:
+                  type: string
+      responses:
+        '201':
+          description: Paper uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaperResponse'
+
+  /papers/{id}/analyze:
+    post:
+      tags: [papers]
+      summary: Analyze a paper
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                types:
+                  type: array
+                  items:
+                    type: string
+                    enum: [summary, methodology, contributions, citations, comparison]
+      responses:
+        '202':
+          description: Analysis queued
+
+  /trending:
+    get:
+      tags: [trending]
+      summary: Get trending items
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: source
+          in: query
+          schema:
+            type: string
+            enum: [github, ccf, arxiv]
+        - name: category_id
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Trending items
+
+  /learning/generate:
+    post:
+      tags: [learning]
+      summary: Generate a learning path
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateLearningPathRequest'
+      responses:
+        '202':
+          description: Learning path generation queued
+
+  /reviews/generate:
+    post:
+      tags: [reviews]
+      summary: Generate a literature review
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReviewRequest'
+      responses:
+        '202':
+          description: Review generation queued
+
+  /reviews/{id}/score:
+    post:
+      tags: [reviews]
+      summary: Score a review
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Scoring result
+
+  /ccf/categories:
+    get:
+      tags: [papers]
+      summary: Get CCF categories
+      responses:
+        '200':
+          description: CCF categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CCFCategory'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    CreateUserRequest:
+      type: object
+      required:
+        - email
+        - password
+        - name
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        name:
+          type: string
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+            expires_at:
+              type: integer
+            user:
+              $ref: '#/components/schemas/UserResponse'
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        name:
+          type: string
+        avatar:
+          type: string
+        role:
+          type: string
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    PaperResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        authors:
+          type: array
+          items:
+            type: string
+        abstract:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [pending, processing, completed, failed]
+        ccf_category:
+          $ref: '#/components/schemas/CCFCategory'
+        created_at:
+          type: string
+          format: date-time
+
+    CCFCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        name_en:
+          type: string
+
+    GenerateLearningPathRequest:
+      type: object
+      required:
+        - category_id
+        - difficulty
+      properties:
+        category_id:
+          type: integer
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        prerequisites:
+          type: array
+          items:
+            type: string
+        focus_areas:
+          type: array
+          items:
+            type: string
+
+    GenerateReviewRequest:
+      type: object
+      required:
+        - title
+        - paper_ids
+      properties:
+        title:
+          type: string
+        paper_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        category_id:
+          type: integer
+        style:
+          type: string
+          enum: [academic, summary, comprehensive]
+
+    PaginationMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+

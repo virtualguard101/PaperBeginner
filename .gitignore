@@ -1,0 +1,81 @@
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go
+backend/tmp/
+backend/vendor/
+*.test
+*.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# Config with secrets
+backend/config.yaml
+deployments/config/config.yaml
+
+# Logs
+*.log
+logs/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+.npm
+
+# Build
+build/
+dist/
+
+# Testing
+coverage/
+*.cover
+*.coverage
+.coverage
+htmlcov/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Keys and certificates
+*.pem
+*.key
+*.crt
+
+# MinIO data (if running locally)
+minio_data/
+
+# Docker volumes
+postgres_data/
+redis_data/
+
+# Cursor
+.cursor/
+
