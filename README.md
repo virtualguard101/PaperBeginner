@@ -1,14 +1,12 @@
-# PaperBeginer
-
 <div align="center">
+
+# PaperBeginer
 
 ![PaperBeginer Logo](https://img.shields.io/badge/PaperBeginer-AI%20Academic%20Guide-blue?style=for-the-badge)
 
 **AI 驱动的学术研究引导平台，助力学术新人快速入门计算机学术研究**
 
-[![Go Version](https://img.shields.io/badge/Go-1.22+-00ADD8?style=flat-square&logo=go)](https://go.dev/)
-[![React](https://img.shields.io/badge/React-18.3+-61DAFB?style=flat-square&logo=react)](https://react.dev/)
-[![License](https://img.shields.io/badge/License-LGPL%203.0-green?style=flat-square)](LICENSE)
+[![Go Version](https://img.shields.io/badge/Go-1.22+-00ADD8?style=flat-square&logo=go)](https://go.dev/) [![React](https://img.shields.io/badge/React-18.3+-61DAFB?style=flat-square&logo=react)](https://react.dev/) [![License](https://img.shields.io/badge/License-AGPL%203.0-green?style=flat-square)](LICENSE)
 
 [English](README.en.md) | [中文](#中文)
 

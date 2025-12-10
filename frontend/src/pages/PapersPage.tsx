@@ -47,10 +47,10 @@ const mockPapers = [
 ]
 
 const statusConfig = {
-  pending: { icon: Clock, label: '等待处理', color: 'text-yellow-400 bg-yellow-400/10' },
+  pending: { icon: Clock, label: '等待处理', color: 'text-yellow-400 bg-yellow-400/10', animate: false },
   processing: { icon: Loader2, label: '分析中', color: 'text-blue-400 bg-blue-400/10', animate: true },
-  completed: { icon: CheckCircle, label: '已完成', color: 'text-green-400 bg-green-400/10' },
-  failed: { icon: AlertCircle, label: '处理失败', color: 'text-red-400 bg-red-400/10' },
+  completed: { icon: CheckCircle, label: '已完成', color: 'text-green-400 bg-green-400/10', animate: false },
+  failed: { icon: AlertCircle, label: '处理失败', color: 'text-red-400 bg-red-400/10', animate: false },
 }
 
 export default function PapersPage() {
@@ -103,26 +103,29 @@ export default function PapersPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        {...getRootProps()}
-        className={`glass-card p-8 border-2 border-dashed cursor-pointer transition-all ${
-          isDragActive 
-            ? 'border-primary-500 bg-primary-500/5' 
-            : 'border-dark-600 hover:border-primary-500/50'
-        }`}
       >
-        <input {...getInputProps()} />
-        <div className="text-center">
-          {uploading ? (
-            <Loader2 className="w-12 h-12 text-primary-400 mx-auto mb-4 animate-spin" />
-          ) : (
-            <Upload className="w-12 h-12 text-dark-500 mx-auto mb-4" />
-          )}
-          <p className="text-lg font-medium mb-2">
-            {isDragActive ? '释放以上传文件' : uploading ? '正在上传...' : '拖放 PDF 文件到这里'}
-          </p>
-          <p className="text-dark-400 text-sm">
-            或者点击选择文件 • 支持 PDF 格式
-          </p>
+        <div
+          {...getRootProps()}
+          className={`glass-card p-8 border-2 border-dashed cursor-pointer transition-all ${
+            isDragActive 
+              ? 'border-primary-500 bg-primary-500/5' 
+              : 'border-dark-600 hover:border-primary-500/50'
+          }`}
+        >
+          <input {...getInputProps()} />
+          <div className="text-center">
+            {uploading ? (
+              <Loader2 className="w-12 h-12 text-primary-400 mx-auto mb-4 animate-spin" />
+            ) : (
+              <Upload className="w-12 h-12 text-dark-500 mx-auto mb-4" />
+            )}
+            <p className="text-lg font-medium mb-2">
+              {isDragActive ? '释放以上传文件' : uploading ? '正在上传...' : '拖放 PDF 文件到这里'}
+            </p>
+            <p className="text-dark-400 text-sm">
+              或者点击选择文件 • 支持 PDF 格式
+            </p>
+          </div>
         </div>
       </motion.div>
 
