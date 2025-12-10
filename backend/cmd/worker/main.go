@@ -8,10 +8,10 @@ import (
 	"syscall"
 
 	"github.com/hibiken/asynq"
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/internal/repository/postgres"
-	"github.com/virtualguard/PaperBeginer/internal/worker"
-	"github.com/virtualguard/PaperBeginer/pkg/logger"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/internal/repository/postgres"
+	"github.com/virtualguard/PaperBeginner/internal/worker"
+	"github.com/virtualguard/PaperBeginner/pkg/logger"
 	"go.uber.org/zap"
 )
 
@@ -30,7 +30,7 @@ func main() {
 	}
 	defer logger.Sync()
 
-	logger.Info("Starting PaperBeginer Worker",
+	logger.Info("Starting PaperBeginner Worker",
 		zap.String("env", cfg.App.Env),
 	)
 

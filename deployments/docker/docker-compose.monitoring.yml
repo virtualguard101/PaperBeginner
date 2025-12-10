@@ -7,7 +7,7 @@ services:
   # Prometheus for metrics collection
   prometheus:
     image: prom/prometheus:v2.50.0
-    container_name: paperbeginer-prometheus
+    container_name: paperbeginner-prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -20,12 +20,12 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Grafana for visualization
   grafana:
     image: grafana/grafana:10.3.1
-    container_name: paperbeginer-grafana
+    container_name: paperbeginner-grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
@@ -38,24 +38,24 @@ services:
     depends_on:
       - prometheus
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Loki for log aggregation
   loki:
     image: grafana/loki:2.9.4
-    container_name: paperbeginer-loki
+    container_name: paperbeginner-loki
     command: -config.file=/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
     volumes:
       - loki_data:/loki
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Promtail for log collection
   promtail:
     image: grafana/promtail:2.9.4
-    container_name: paperbeginer-promtail
+    container_name: paperbeginner-promtail
     volumes:
       - /var/log:/var/log:ro
       - ./promtail-config.yml:/etc/promtail/config.yml:ro
@@ -63,7 +63,7 @@ services:
     depends_on:
       - loki
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
 volumes:
   prometheus_data:

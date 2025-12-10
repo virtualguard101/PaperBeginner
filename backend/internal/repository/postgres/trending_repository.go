@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	"github.com/virtualguard/PaperBeginer/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
 	"gorm.io/gorm"
 )
 

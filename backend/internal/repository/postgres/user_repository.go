@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
 	"gorm.io/gorm"
 )
 

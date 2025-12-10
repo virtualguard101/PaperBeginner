@@ -1,8 +1,8 @@
-# PaperBeginer
+# PaperBeginner
 
 ## 🎯 Introduction
 
-PaperBeginer is an AI Agent-powered academic research guidance platform designed for newcomers in computer science. It provides intelligent tools to help users:
+PaperBeginner is an AI Agent-powered academic research guidance platform designed for newcomers in computer science. It provides intelligent tools to help users:
 
 - 📊 **Track Research Trends** - Monitor GitHub trending projects and CCF top-tier conference papers
 
@@ -16,8 +16,8 @@ PaperBeginer is an AI Agent-powered academic research guidance platform designed
 
 ```bash
 # Clone the repository
-git clone https://github.com/virtualguard/PaperBeginer.git
-cd PaperBeginer
+git clone https://github.com/virtualguard/PaperBeginner.git
+cd PaperBeginner
 
 # Start infrastructure
 make dev-infra

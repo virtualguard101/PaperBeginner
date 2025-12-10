@@ -50,7 +50,7 @@ export default function LoginPage() {
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
             <BookOpen className="w-6 h-6 text-white" />
           </div>
-          <span className="text-2xl font-bold gradient-text">PaperBeginer</span>
+          <span className="text-2xl font-bold gradient-text">PaperBeginner</span>
         </Link>
 
         {/* Form Card */}

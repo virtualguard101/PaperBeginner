@@ -55,7 +55,7 @@ export default function Layout() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="font-semibold text-lg gradient-text">PaperBeginer</span>
+            <span className="font-semibold text-lg gradient-text">PaperBeginner</span>
           </div>
           <button 
             onClick={() => setSidebarOpen(false)}

@@ -3,7 +3,7 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/virtualguard/PaperBeginer/pkg/response"
+	"github.com/virtualguard/PaperBeginner/pkg/response"
 )
 
 // GenerateLearningPath generates a learning path
