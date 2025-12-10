@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/virtualguard/PaperBeginer/internal/handler/middleware"
-	"github.com/virtualguard/PaperBeginer/pkg/response"
+	"github.com/virtualguard/PaperBeginner/internal/handler/middleware"
+	"github.com/virtualguard/PaperBeginner/pkg/response"
 )
 
 // GenerateReview generates a literature review

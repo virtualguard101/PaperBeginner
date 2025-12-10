@@ -6,8 +6,8 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
 	"golang.org/x/crypto/bcrypt"
 )
 

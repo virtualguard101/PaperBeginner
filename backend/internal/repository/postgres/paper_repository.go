@@ -3,7 +3,7 @@ package postgres
 import (
 	"github.com/google/uuid"
 	"github.com/pgvector/pgvector-go"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
 	"gorm.io/gorm"
 )
 

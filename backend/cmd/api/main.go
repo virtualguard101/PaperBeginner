@@ -10,17 +10,17 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/internal/handler"
-	"github.com/virtualguard/PaperBeginer/internal/handler/middleware"
-	"github.com/virtualguard/PaperBeginer/internal/repository/postgres"
-	"github.com/virtualguard/PaperBeginer/internal/service"
-	"github.com/virtualguard/PaperBeginer/pkg/logger"
-	"github.com/virtualguard/PaperBeginer/pkg/validator"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/internal/handler"
+	"github.com/virtualguard/PaperBeginner/internal/handler/middleware"
+	"github.com/virtualguard/PaperBeginner/internal/repository/postgres"
+	"github.com/virtualguard/PaperBeginner/internal/service"
+	"github.com/virtualguard/PaperBeginner/pkg/logger"
+	"github.com/virtualguard/PaperBeginner/pkg/validator"
 	"go.uber.org/zap"
 )
 
-// @title PaperBeginer API
+// @title PaperBeginner API
 // @version 1.0
 // @description AI-powered Academic Research Guide API
 // @host localhost:8080
@@ -43,7 +43,7 @@ func main() {
 	}
 	defer logger.Sync()
 
-	logger.Info("Starting PaperBeginer API",
+	logger.Info("Starting PaperBeginner API",
 		zap.String("env", cfg.App.Env),
 		zap.Int("port", cfg.App.Port),
 	)
@@ -218,4 +218,3 @@ func main() {
 	_ = learningPathRepo
 	_ = reviewRepo
 }
-

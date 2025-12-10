@@ -1,8 +1,8 @@
 <div align="center">
 
-# PaperBeginer
+# PaperBeginner
 
-![PaperBeginer Logo](https://img.shields.io/badge/PaperBeginer-AI%20Academic%20Guide-blue?style=for-the-badge)
+![PaperBeginner Logo](https://img.shields.io/badge/PaperBeginner-AI%20Academic%20Guide-blue?style=for-the-badge)
 
 **AI 驱动的学术研究引导平台，助力学术新人快速入门计算机学术研究**
 
@@ -16,7 +16,7 @@
 
 ## 🎯 项目简介
 
-PaperBeginer 是一个基于 AI Agent 的学术研究辅助平台，专为计算机科学领域的学术新人设计。通过智能化工具帮助用户：
+PaperBeginner 是一个基于 AI Agent 的学术研究辅助平台，专为计算机科学领域的学术新人设计。通过智能化工具帮助用户：
 
 - 📊 **追踪研究热点** - 实时监控 GitHub 热门项目和 CCF 顶会论文
 - 📚 **规划学习路线** - AI 生成个性化学习路径，整合顶尖院校资源
@@ -120,8 +120,8 @@ PaperBeginer 是一个基于 AI Agent 的学术研究辅助平台，专为计算
 1. **克隆仓库**
 
 ```bash
-git clone https://github.com/virtualguard/PaperBeginer.git
-cd PaperBeginer
+git clone https://github.com/virtualguard/PaperBeginner.git
+cd PaperBeginner
 ```
 
 2. **启动基础设施**
@@ -161,7 +161,7 @@ npm run dev
 ## 📁 项目结构
 
 ```
-PaperBeginer/
+PaperBeginner/
 ├── backend/                 # Go 后端
 │   ├── cmd/                 # 入口点 (api, worker)
 │   ├── internal/            # 内部包

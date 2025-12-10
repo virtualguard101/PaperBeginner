@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/virtualguard/PaperBeginer/internal/agent"
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
-	"github.com/virtualguard/PaperBeginer/internal/llm"
-	"github.com/virtualguard/PaperBeginer/pkg/logger"
+	"github.com/virtualguard/PaperBeginner/internal/agent"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/llm"
+	"github.com/virtualguard/PaperBeginner/pkg/logger"
 	"go.uber.org/zap"
 )
 

@@ -1,4 +1,4 @@
-# PaperBeginer Configuration Example
+# PaperBeginner Configuration Example
 # Copy this file to config.yaml and update values
 
 app:
@@ -9,7 +9,7 @@ app:
   rate_limit_burst: 20
 
 database:
-  url: postgres://paperbeginer:paperbeginer_secret@localhost:5432/paperbeginer?sslmode=disable
+  url: postgres://paperbeginner:paperbeginner_secret@localhost:5432/paperbeginner?sslmode=disable
   max_open_conns: 25
   max_idle_conns: 5
   conn_max_lifetime: 5m
@@ -24,7 +24,7 @@ minio:
   access_key: minioadmin
   secret_key: minioadmin
   use_ssl: false
-  bucket: paperbeginer
+  bucket: paperbeginner
 
 jwt:
   secret: your-jwt-secret-change-in-production

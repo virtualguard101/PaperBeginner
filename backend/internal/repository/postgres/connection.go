@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

@@ -63,7 +63,7 @@ export default function HomePage() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="font-semibold text-lg gradient-text">PaperBeginer</span>
+            <span className="font-semibold text-lg gradient-text">PaperBeginner</span>
           </div>
           <div className="flex items-center gap-4">
             {isAuthenticated ? (
@@ -101,7 +101,7 @@ export default function HomePage() {
             </h1>
             
             <p className="text-xl text-dark-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-              PaperBeginer 是您的 AI 学术导师，帮助学术新人快速掌握研究领域前沿动态，
+              PaperBeginner 是您的 AI 学术导师，帮助学术新人快速掌握研究领域前沿动态，
               构建专业知识体系，提升论文阅读与写作能力。
             </p>
 
@@ -111,7 +111,7 @@ export default function HomePage() {
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a 
-                href="https://github.com/virtualguard/paperbeginer" 
+                href="https://github.com/virtualguard/paperbeginner" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn-secondary flex items-center gap-2"
@@ -266,10 +266,10 @@ export default function HomePage() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="font-semibold gradient-text">PaperBeginer</span>
+            <span className="font-semibold gradient-text">PaperBeginner</span>
           </div>
           <p className="text-dark-500 text-sm">
-            © 2024 PaperBeginer. 让学术研究更简单。
+            © 2024 PaperBeginner. 让学术研究更简单。
           </p>
         </div>
       </footer>

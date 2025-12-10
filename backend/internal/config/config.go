@@ -92,7 +92,7 @@ func Load() (*Config, error) {
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
 	viper.AddConfigPath("./config")
-	viper.AddConfigPath("/etc/paperbeginer")
+	viper.AddConfigPath("/etc/paperbeginner")
 
 	// Set defaults
 	setDefaults()
@@ -136,7 +136,7 @@ func setDefaults() {
 
 	// MinIO defaults
 	viper.SetDefault("minio.use_ssl", false)
-	viper.SetDefault("minio.bucket", "paperbeginer")
+	viper.SetDefault("minio.bucket", "paperbeginner")
 
 	// JWT defaults
 	viper.SetDefault("jwt.expiry", "24h")

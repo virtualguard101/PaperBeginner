@@ -2,10 +2,10 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
-	"github.com/virtualguard/PaperBeginer/internal/handler/middleware"
-	"github.com/virtualguard/PaperBeginer/internal/service"
-	"github.com/virtualguard/PaperBeginer/pkg/response"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/handler/middleware"
+	"github.com/virtualguard/PaperBeginner/internal/service"
+	"github.com/virtualguard/PaperBeginner/pkg/response"
 )
 
 // UserHandler handles user-related HTTP requests

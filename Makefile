@@ -2,7 +2,7 @@
 
 # Default target
 help:
-	@echo "PaperBeginer - AI-powered Academic Research Guide"
+	@echo "PaperBeginner - AI-powered Academic Research Guide"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make dev          - Start development environment"

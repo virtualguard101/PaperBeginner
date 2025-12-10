@@ -14,10 +14,10 @@ import (
 	"github.com/hibiken/asynq"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/internal/domain"
-	"github.com/virtualguard/PaperBeginer/internal/worker"
-	"github.com/virtualguard/PaperBeginer/pkg/logger"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/worker"
+	"github.com/virtualguard/PaperBeginner/pkg/logger"
 	"go.uber.org/zap"
 )
 

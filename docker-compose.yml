@@ -4,28 +4,28 @@ services:
   # PostgreSQL Database with pgvector
   postgres:
     image: pgvector/pgvector:pg16
-    container_name: paperbeginer-postgres
+    container_name: paperbeginner-postgres
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-paperbeginer}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-paperbeginer_secret}
-      POSTGRES_DB: ${POSTGRES_DB:-paperbeginer}
+      POSTGRES_USER: ${POSTGRES_USER:-paperbeginner}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-paperbeginner_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-paperbeginner}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-paperbeginer}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-paperbeginner}"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Redis for caching and task queue
   redis:
     image: redis:7-alpine
-    container_name: paperbeginer-redis
+    container_name: paperbeginner-redis
     command: redis-server --appendonly yes
     ports:
       - "6379:6379"
@@ -37,12 +37,12 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # MinIO for file storage
   minio:
     image: minio/minio:latest
-    container_name: paperbeginer-minio
+    container_name: paperbeginner-minio
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
@@ -58,17 +58,17 @@ services:
       timeout: 20s
       retries: 3
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Backend API Service
   api:
     build:
       context: .
       dockerfile: deployments/docker/backend.Dockerfile
-    container_name: paperbeginer-api
+    container_name: paperbeginner-api
     environment:
       - APP_ENV=${APP_ENV:-development}
-      - DATABASE_URL=postgres://${POSTGRES_USER:-paperbeginer}:${POSTGRES_PASSWORD:-paperbeginer_secret}@postgres:5432/${POSTGRES_DB:-paperbeginer}?sslmode=disable
+      - DATABASE_URL=postgres://${POSTGRES_USER:-paperbeginner}:${POSTGRES_PASSWORD:-paperbeginner_secret}@postgres:5432/${POSTGRES_DB:-paperbeginner}?sslmode=disable
       - REDIS_URL=redis://redis:6379
       - MINIO_ENDPOINT=minio:9000
       - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
@@ -83,17 +83,17 @@ services:
       minio:
         condition: service_healthy
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Background Worker Service
   worker:
     build:
       context: .
       dockerfile: deployments/docker/worker.Dockerfile
-    container_name: paperbeginer-worker
+    container_name: paperbeginner-worker
     environment:
       - APP_ENV=${APP_ENV:-development}
-      - DATABASE_URL=postgres://${POSTGRES_USER:-paperbeginer}:${POSTGRES_PASSWORD:-paperbeginer_secret}@postgres:5432/${POSTGRES_DB:-paperbeginer}?sslmode=disable
+      - DATABASE_URL=postgres://${POSTGRES_USER:-paperbeginner}:${POSTGRES_PASSWORD:-paperbeginner_secret}@postgres:5432/${POSTGRES_DB:-paperbeginner}?sslmode=disable
       - REDIS_URL=redis://redis:6379
       - MINIO_ENDPOINT=minio:9000
       - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
@@ -104,25 +104,25 @@ services:
       redis:
         condition: service_healthy
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Frontend (React)
   frontend:
     build:
       context: .
       dockerfile: deployments/docker/frontend.Dockerfile
-    container_name: paperbeginer-frontend
+    container_name: paperbeginner-frontend
     ports:
       - "3000:80"
     depends_on:
       - api
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
 
   # Traefik Reverse Proxy (for production)
   traefik:
     image: traefik:v3.0
-    container_name: paperbeginer-traefik
+    container_name: paperbeginner-traefik
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
@@ -136,7 +136,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - paperbeginer-network
+      - paperbeginner-network
     profiles:
       - production
 
@@ -146,6 +146,6 @@ volumes:
   minio_data:
 
 networks:
-  paperbeginer-network:
+  paperbeginner-network:
     driver: bridge
 

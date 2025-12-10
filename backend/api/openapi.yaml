@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
-  title: PaperBeginer API
+  title: PaperBeginner API
   description: AI-powered Academic Research Guide API
   version: 1.0.0
   contact:
-    name: PaperBeginer Team
+    name: PaperBeginner Team
 servers:
   - url: http://localhost:8080/api/v1
     description: Development server
-  - url: https://api.paperbeginer.com/api/v1
+  - url: https://api.paperbeginner.com/api/v1
     description: Production server
 
 tags:

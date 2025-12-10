@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/virtualguard/PaperBeginer/internal/config"
-	"github.com/virtualguard/PaperBeginer/pkg/logger"
+	"github.com/virtualguard/PaperBeginner/internal/config"
+	"github.com/virtualguard/PaperBeginner/pkg/logger"
 	"go.uber.org/zap"
 )
 

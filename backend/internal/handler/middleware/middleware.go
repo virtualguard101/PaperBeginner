@@ -9,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/virtualguard/PaperBeginer/pkg/logger"
-	"github.com/virtualguard/PaperBeginer/pkg/response"
+	"github.com/virtualguard/PaperBeginner/pkg/logger"
+	"github.com/virtualguard/PaperBeginner/pkg/response"
 	"go.uber.org/zap"
 	"golang.org/x/time/rate"
 )

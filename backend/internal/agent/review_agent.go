@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/virtualguard/PaperBeginer/internal/domain"
-	"github.com/virtualguard/PaperBeginer/internal/llm"
+	"github.com/virtualguard/PaperBeginner/internal/domain"
+	"github.com/virtualguard/PaperBeginner/internal/llm"
 )
 
 // ReviewAgent handles literature review generation and scoring

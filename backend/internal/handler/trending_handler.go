@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/virtualguard/PaperBeginer/pkg/response"
+	"github.com/virtualguard/PaperBeginner/pkg/response"
 )
 
 // GetTrending returns trending items
