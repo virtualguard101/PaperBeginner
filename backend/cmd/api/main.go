@@ -10,13 +10,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/virtualguard/PaperBeginner/internal/config"
-	"github.com/virtualguard/PaperBeginner/internal/handler"
-	"github.com/virtualguard/PaperBeginner/internal/handler/middleware"
-	"github.com/virtualguard/PaperBeginner/internal/repository/postgres"
-	"github.com/virtualguard/PaperBeginner/internal/service"
-	"github.com/virtualguard/PaperBeginner/pkg/logger"
-	"github.com/virtualguard/PaperBeginner/pkg/validator"
+	"github.com/virtualguard101/PaperBeginner/internal/config"
+	"github.com/virtualguard101/PaperBeginner/internal/handler"
+	"github.com/virtualguard101/PaperBeginner/internal/handler/middleware"
+	"github.com/virtualguard101/PaperBeginner/internal/repository/postgres"
+	"github.com/virtualguard101/PaperBeginner/internal/service"
+	"github.com/virtualguard101/PaperBeginner/pkg/logger"
+	"github.com/virtualguard101/PaperBeginner/pkg/validator"
 	"go.uber.org/zap"
 )
 

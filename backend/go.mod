@@ -1,4 +1,4 @@
-module github.com/virtualguard/PaperBeginner
+module github.com/virtualguard101/PaperBeginner
 
 go 1.22.0
 

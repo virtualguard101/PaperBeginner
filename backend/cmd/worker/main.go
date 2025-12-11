@@ -8,10 +8,10 @@ import (
 	"syscall"
 
 	"github.com/hibiken/asynq"
-	"github.com/virtualguard/PaperBeginner/internal/config"
-	"github.com/virtualguard/PaperBeginner/internal/repository/postgres"
-	"github.com/virtualguard/PaperBeginner/internal/worker"
-	"github.com/virtualguard/PaperBeginner/pkg/logger"
+	"github.com/virtualguard101/PaperBeginner/internal/config"
+	"github.com/virtualguard101/PaperBeginner/internal/repository/postgres"
+	"github.com/virtualguard101/PaperBeginner/internal/worker"
+	"github.com/virtualguard101/PaperBeginner/pkg/logger"
 	"go.uber.org/zap"
 )
 
@@ -96,4 +96,3 @@ func main() {
 	<-ctx.Done()
 	logger.Info("Worker exited gracefully")
 }
-
