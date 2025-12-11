@@ -174,7 +174,7 @@ PaperBeginner/
 │   │   ├── service/         # 业务逻辑
 │   │   └── worker/          # 异步任务
 │   ├── pkg/                 # 公共包
-│   └── migrations/          # 数据库迁移
+│   └── data/          # 数据库迁移
 ├── frontend/                # React 前端
 │   └── src/
 │       ├── components/      # UI 组件

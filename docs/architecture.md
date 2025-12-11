@@ -201,7 +201,7 @@ PaperBeginner/
 │   │   ├── response/            # 响应封装
 │   │   └── validator/           # 参数校验
 │   │
-│   ├── migrations/              # 数据库迁移
+│   ├── data/              # 数据库迁移
 │   ├── api/                     # OpenAPI 规范
 │   ├── config.yaml              # 配置文件
 │   ├── go.mod
