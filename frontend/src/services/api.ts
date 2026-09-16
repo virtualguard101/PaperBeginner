@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/authStore'
 
 const api = axios.create({
   baseURL: '/api/v1',
+  timeout: 120000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -13,6 +14,10 @@ api.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
+  }
+  // FormData must use browser-generated multipart boundary
+  if (typeof FormData !== 'undefined' && config.data instanceof FormData) {
+    delete config.headers['Content-Type']
   }
   return config
 })
@@ -53,9 +58,7 @@ export const userApi = {
 // Paper API
 export const paperApi = {
   upload: (formData: FormData) =>
-    api.post('/papers/upload', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    }),
+    api.post('/papers/upload', formData),
   list: (params?: { page?: number; per_page?: number }) =>
     api.get('/papers', { params }),
   get: (id: string) =>
@@ -70,8 +73,9 @@ export const paperApi = {
 
 // Trending API
 export const trendingApi = {
-  getItems: (params?: { source?: string; category_id?: number; limit?: number }) =>
+  getItems: (params?: { source?: string; category_id?: number; limit?: number; refresh?: boolean }) =>
     api.get('/trending', { params }),
+  refresh: () => api.post('/trending/refresh'),
   getReports: (params?: { category_id?: number; limit?: number }) =>
     api.get('/trending/reports', { params }),
 }

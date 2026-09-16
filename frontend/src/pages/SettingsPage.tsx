@@ -12,6 +12,7 @@ import {
   Check
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
+import { userApi } from '@/services/api'
 import toast from 'react-hot-toast'
 
 const llmProviders = [
@@ -22,7 +23,7 @@ const llmProviders = [
 ]
 
 export default function SettingsPage() {
-  const { user } = useAuthStore()
+  const { user, updateUser } = useAuthStore()
   const [activeTab, setActiveTab] = useState('profile')
   
   // Profile settings
@@ -42,8 +43,26 @@ export default function SettingsPage() {
   const [notifyTrending, setNotifyTrending] = useState(true)
   const [language, setLanguage] = useState('zh')
 
-  const handleSave = () => {
-    toast.success('设置已保存')
+  const handleSave = async () => {
+    try {
+      const res = await userApi.updateMe({
+        name,
+        preferences: {
+          preferred_llm: preferredProvider,
+          notify_on_trending: notifyTrending,
+          language,
+          openai_api_key: apiKeys.openai || undefined,
+          anthropic_api_key: apiKeys.anthropic || undefined,
+          deepseek_api_key: apiKeys.deepseek || undefined,
+        },
+      })
+      if (res.data.data) {
+        updateUser({ name: res.data.data.name })
+      }
+      toast.success('设置已保存')
+    } catch {
+      toast.error('保存失败')
+    }
   }
 
   const tabs = [

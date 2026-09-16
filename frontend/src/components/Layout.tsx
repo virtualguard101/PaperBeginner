@@ -15,12 +15,12 @@ import { useState } from 'react'
 import { useAuthStore } from '@/stores/authStore'
 
 const navItems = [
-  { path: '/app', icon: LayoutDashboard, label: 'Dashboard', end: true },
-  { path: '/app/trending', icon: TrendingUp, label: 'Trending' },
-  { path: '/app/papers', icon: FileText, label: 'Papers' },
-  { path: '/app/learning', icon: GraduationCap, label: 'Learning' },
-  { path: '/app/reviews', icon: BookOpen, label: 'Reviews' },
-  { path: '/app/settings', icon: Settings, label: 'Settings' },
+  { path: '/app', icon: LayoutDashboard, label: '概览', end: true },
+  { path: '/app/trending', icon: TrendingUp, label: '热点' },
+  { path: '/app/papers', icon: FileText, label: '论文' },
+  { path: '/app/learning', icon: GraduationCap, label: '学习路线' },
+  { path: '/app/reviews', icon: BookOpen, label: '综述' },
+  { path: '/app/settings', icon: Settings, label: '设置' },
 ]
 
 export default function Layout() {

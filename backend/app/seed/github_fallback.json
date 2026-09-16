@@ -1,0 +1,32 @@
+[
+  {
+    "source_id": "openai-whisper",
+    "title": "openai/whisper",
+    "description": "Robust speech recognition via large-scale weak supervision.",
+    "url": "https://github.com/openai/whisper",
+    "stars": 72000,
+    "forks": 8500,
+    "language": "Python",
+    "topics": ["speech", "ai", "transformer"]
+  },
+  {
+    "source_id": "huggingface-transformers",
+    "title": "huggingface/transformers",
+    "description": "State-of-the-art Machine Learning for PyTorch, TensorFlow, and JAX.",
+    "url": "https://github.com/huggingface/transformers",
+    "stars": 140000,
+    "forks": 28000,
+    "language": "Python",
+    "topics": ["nlp", "llm", "deep-learning"]
+  },
+  {
+    "source_id": "langchain-langchain",
+    "title": "langchain-ai/langchain",
+    "description": "Build context-aware reasoning applications with language models.",
+    "url": "https://github.com/langchain-ai/langchain",
+    "stars": 98000,
+    "forks": 16000,
+    "language": "Python",
+    "topics": ["llm", "agent", "ai"]
+  }
+]

@@ -1,151 +1,35 @@
-version: '3.8'
-
 services:
-  # PostgreSQL Database with pgvector
-  postgres:
-    image: pgvector/pgvector:pg16
-    container_name: paperbeginner-postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-paperbeginner}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-paperbeginner_secret}
-      POSTGRES_DB: ${POSTGRES_DB:-paperbeginner}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-paperbeginner}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - paperbeginner-network
-
-  # Redis for caching and task queue
-  redis:
-    image: redis:7-alpine
-    container_name: paperbeginner-redis
-    command: redis-server --appendonly yes
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - paperbeginner-network
-
-  # MinIO for file storage
-  minio:
-    image: minio/minio:latest
-    container_name: paperbeginner-minio
-    command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - minio_data:/data
-    healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-    networks:
-      - paperbeginner-network
-
-  # Backend API Service
   api:
     build:
       context: .
-      dockerfile: deployments/docker/backend.Dockerfile
+      dockerfile: backend/Dockerfile
     container_name: paperbeginner-api
     environment:
-      - APP_ENV=${APP_ENV:-development}
-      - DATABASE_URL=postgres://${POSTGRES_USER:-paperbeginner}:${POSTGRES_PASSWORD:-paperbeginner_secret}@postgres:5432/${POSTGRES_DB:-paperbeginner}?sslmode=disable
-      - REDIS_URL=redis://redis:6379
-      - MINIO_ENDPOINT=minio:9000
-      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
-      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minioadmin}
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      - LLM_BASE_URL=${LLM_BASE_URL:-https://api.deepseek.com/v1}
+      - LLM_MODEL=${LLM_MODEL:-deepseek-chat}
+      - JWT_SECRET=${JWT_SECRET:-paperbeginner-demo-secret-change-me}
+      - DATABASE_URL=sqlite:////app/data/paperbeginner.db
+      - UPLOAD_DIR=/app/data/uploads
+    volumes:
+      - api_data:/app/data
     ports:
-      - "8080:8080"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-    networks:
-      - paperbeginner-network
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
 
-  # Background Worker Service
-  worker:
-    build:
-      context: .
-      dockerfile: deployments/docker/worker.Dockerfile
-    container_name: paperbeginner-worker
-    environment:
-      - APP_ENV=${APP_ENV:-development}
-      - DATABASE_URL=postgres://${POSTGRES_USER:-paperbeginner}:${POSTGRES_PASSWORD:-paperbeginner_secret}@postgres:5432/${POSTGRES_DB:-paperbeginner}?sslmode=disable
-      - REDIS_URL=redis://redis:6379
-      - MINIO_ENDPOINT=minio:9000
-      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
-      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minioadmin}
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - paperbeginner-network
-
-  # Frontend (React)
   frontend:
     build:
       context: .
       dockerfile: deployments/docker/frontend.Dockerfile
     container_name: paperbeginner-frontend
     ports:
-      - "3000:80"
+      - "5173:80"
     depends_on:
       - api
-    networks:
-      - paperbeginner-network
-
-  # Traefik Reverse Proxy (for production)
-  traefik:
-    image: traefik:v3.0
-    container_name: paperbeginner-traefik
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8081:8080"  # Traefik dashboard
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - paperbeginner-network
-    profiles:
-      - production
 
 volumes:
-  postgres_data:
-  redis_data:
-  minio_data:
-
-networks:
-  paperbeginner-network:
-    driver: bridge
-
+  api_data:

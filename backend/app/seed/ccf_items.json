@@ -1,0 +1,56 @@
+[
+  {
+    "source_id": "neurips-attention",
+    "title": "Attention Is All You Need",
+    "description": "提出 Transformer，成为现代大模型的基础架构。",
+    "url": "https://arxiv.org/abs/1706.03762",
+    "topics": ["transformer", "nlp", "attention"],
+    "ccf_category_id": 8,
+    "trend_score": 99.0
+  },
+  {
+    "source_id": "cvpr-resnet",
+    "title": "Deep Residual Learning for Image Recognition",
+    "description": "ResNet 残差学习使超深网络可训练，CV 里程碑工作。",
+    "url": "https://arxiv.org/abs/1512.03385",
+    "topics": ["cv", "resnet"],
+    "ccf_category_id": 8,
+    "trend_score": 97.5
+  },
+  {
+    "source_id": "sigmod-mapreduce",
+    "title": "MapReduce: Simplified Data Processing on Large Clusters",
+    "description": "大规模数据并行处理的经典系统论文。",
+    "url": "https://research.google/pubs/pub62/",
+    "topics": ["distributed", "data"],
+    "ccf_category_id": 1,
+    "trend_score": 90.0
+  },
+  {
+    "source_id": "ccs-ssl",
+    "title": "The Quest to Replace Passwords",
+    "description": "可用安全方向的代表性调研，讨论认证机制权衡。",
+    "url": "https://www.cl.cam.ac.uk/~rja14/Papers/bonneau-oakland-quest-to-replace-passwords.pdf",
+    "topics": ["security", "auth"],
+    "ccf_category_id": 3,
+    "trend_score": 88.0
+  },
+  {
+    "source_id": "sigcomm-tcp",
+    "title": "Congestion Avoidance and Control",
+    "description": "TCP 拥塞控制经典论文，计算机网络基础读物。",
+    "url": "https://ee.lbl.gov/papers/congavoid.pdf",
+    "topics": ["tcp", "network"],
+    "ccf_category_id": 2,
+    "trend_score": 86.0
+  },
+  {
+    "source_id": "chi-direct-manipulation",
+    "title": "Direct Manipulation Interfaces",
+    "description": "人机交互直接操纵界面的奠基讨论。",
+    "url": "https://dl.acm.org/",
+    "topics": ["hci"],
+    "ccf_category_id": 9,
+    "trend_score": 80.0
+  }
+]

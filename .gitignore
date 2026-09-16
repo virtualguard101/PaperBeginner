@@ -6,12 +6,21 @@ bin/
 *.so
 *.dylib
 
-# Go
-backend/tmp/
-backend/vendor/
+# Go (archived)
+backend-go/tmp/
+backend-go/vendor/
 *.test
 *.out
 go.sum
+
+# Python
+backend/data/
+backend/.venv/
+backend/venv/
+__pycache__/
+*.pyc
+.venv/
+venv/
 
 # IDE
 .idea/

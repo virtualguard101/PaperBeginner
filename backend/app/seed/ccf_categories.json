@@ -1,0 +1,12 @@
+[
+  {"id": 1, "name": "计算机体系结构/并行与分布计算/存储系统", "name_en": "Computer Architecture / Parallel & Distributed Computing / Storage"},
+  {"id": 2, "name": "计算机网络", "name_en": "Computer Networks"},
+  {"id": 3, "name": "网络与信息安全", "name_en": "Network and Information Security"},
+  {"id": 4, "name": "软件工程/系统软件/程序设计语言", "name_en": "Software Engineering / System Software / Programming Languages"},
+  {"id": 5, "name": "数据库/数据挖掘/内容检索", "name_en": "Databases / Data Mining / Information Retrieval"},
+  {"id": 6, "name": "计算机科学理论", "name_en": "Computer Science Theory"},
+  {"id": 7, "name": "计算机图形学与多媒体", "name_en": "Computer Graphics and Multimedia"},
+  {"id": 8, "name": "人工智能", "name_en": "Artificial Intelligence"},
+  {"id": 9, "name": "人机交互与普适计算", "name_en": "HCI and Ubiquitous Computing"},
+  {"id": 10, "name": "交叉/综合/新兴", "name_en": "Interdisciplinary / Emerging"}
+]

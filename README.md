@@ -1,151 +1,33 @@
-<div align="center">
-
 # PaperBeginner
 
-![PaperBeginner Logo](https://img.shields.io/badge/PaperBeginner-AI%20Academic%20Guide-blue?style=for-the-badge)
+AI 驱动的学术研究引导平台（课设演示版）。
 
-**AI 驱动的学术研究引导平台，助力学术新人快速入门计算机学术研究**
+当前实现：**React 前端 + FastAPI 后端 + SQLite**。原 Go 后端已归档到 `backend-go/`，仅作历史参考。
 
-[![Go Version](https://img.shields.io/badge/Go-1.22+-00ADD8?style=flat-square&logo=go)](https://go.dev/) [![React](https://img.shields.io/badge/React-18.3+-61DAFB?style=flat-square&logo=react)](https://react.dev/) [![License](https://img.shields.io/badge/License-AGPL%203.0-green?style=flat-square)](LICENSE)
+## 演示功能
 
-[English](README.en.md) | [中文](#中文)
+- 注册 / 登录（JWT）
+- 热点：GitHub 搜索热门仓库 + CCF 种子条目，可生成周期短报
+- 论文：上传 PDF，一次分析得到摘要 / 方法 / 贡献
+- 学习路径：按 CCF 领域与难度生成分阶段路线
+- 综述：基于已选论文生成 Markdown 并打分
 
-</div>
+未配置 `LLM_API_KEY` 时，LLM 相关接口返回离线模板，流程仍可走完。
 
----
+## 本地启动（推荐演示）
 
-## 🎯 项目简介
-
-PaperBeginner 是一个基于 AI Agent 的学术研究辅助平台，专为计算机科学领域的学术新人设计。通过智能化工具帮助用户：
-
-- 📊 **追踪研究热点** - 实时监控 GitHub 热门项目和 CCF 顶会论文
-- 📚 **规划学习路线** - AI 生成个性化学习路径，整合顶尖院校资源
-- 📝 **智能论文分析** - 上传论文获取智能摘要、方法论解析
-- 📖 **撰写论文综述** - AI 辅助生成高质量综述并提供评分
-
-## ✨ 核心功能
-
-### 1. 行业前沿热点嗅探
-
-- 自动爬取 GitHub Trending 项目
-
-- 整合 CCF 推荐国际学术刊物/会议论文
-
-- AI 智能分类到 CCF 十大领域
-
-- 生成周/月度热点报告
-
-### 2. 个性化学习路线
-
-- 根据研究方向生成学习路径
-
-- 整合官方文档、MIT/Stanford 公开课、csdiy.wiki 资源
-
-- 分阶段学习目标与进度追踪
-
-### 3. 论文智能分析
-
-- PDF 上传与文本提取
-
-- 论文摘要、方法论、贡献点自动提取
-
-- 向量化存储支持语义搜索
-
-- 多维度深度分析
-
-### 4. 综述撰写与评分
-
-- 基于多篇论文生成论文综述
-
-- 按学术标准进行评分
-
-- 提供改进建议
-
-## 🏗️ 技术架构
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Frontend (React)                        
-├─────────────────────────────────────────────────────────────┤
-│                    API Gateway (Traefik)                     
-├──────────────┬──────────────┬──────────────┬────────────────┤
-│  User Service   Paper Service    Agent Service   Crawler Service  
-├──────────────┴──────────────┴──────────────┴────────────────┤
-│                     Message Queue (Redis Stream)             
-├──────────────┬──────────────┬──────────────────────────────┤
-│  PostgreSQL         Redis            MinIO (文件存储)            
-└──────────────┴──────────────┴──────────────────────────────┘
-```
-
-## 🛠️ 技术栈
-
-**后端:**
-
-- Go 1.22+ / Gin / GORM
-
-- PostgreSQL + pgvector
-
-- Redis / Asynq
-
-- LangChainGo
-
-**前端:**
-
-- React 18 / TypeScript
-
-- Vite / TailwindCSS
-
-- TanStack Query / Zustand
-
-**基础设施:**
-
-- Docker / Docker Compose
-
-- MinIO (对象存储)
-
-- Traefik (反向代理)
-
-## 🚀 快速开始
-
-### 前置要求
-
-- Go 1.22+
-
-- Node.js 20+
-
-- Docker & Docker Compose
-
-### 安装步骤
-
-1. **克隆仓库**
+需要 Python 3.11+ 与 Node.js 20+。
 
 ```bash
-git clone https://github.com/virtualguard/PaperBeginner.git
-cd PaperBeginner
-```
+copy .env.example .env
+# 可选：在 .env 中填写 LLM_API_KEY（DeepSeek 等 OpenAI 兼容接口）
 
-2. **启动基础设施**
-
-```bash
-make dev-infra
-```
-
-3. **配置环境变量**
-
-```bash
-cp deployments/config/config.example.yaml backend/config.yaml
-# 编辑 config.yaml 配置 LLM API Keys
-```
-
-4. **运行后端**
-
-```bash
 cd backend
-go mod download
-go run ./cmd/api
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-5. **运行前端**
+另开终端：
 
 ```bash
 cd frontend
@@ -153,62 +35,45 @@ npm install
 npm run dev
 ```
 
-6. **访问应用**
+打开 http://localhost:5173
 
-- 前端: http://localhost:5173
-- API: http://localhost:8080
+1. 注册账号（密码至少 8 位）
+2. 热点页查看列表与报告
+3. 上传 `frontend/public/sample-attention.pdf`（或任意短 PDF）并点击分析
+4. 生成学习路线
+5. 用该论文生成综述并评分
 
-## 📁 项目结构
+API：http://localhost:8000/health  
+文档：http://localhost:8000/docs
 
-```
-PaperBeginner/
-├── backend/                 # Go 后端
-│   ├── cmd/                 # 入口点 (api, worker)
-│   ├── internal/            # 内部包
-│   │   ├── agent/           # AI Agent 实现
-│   │   ├── config/          # 配置管理
-│   │   ├── domain/          # 领域模型
-│   │   ├── handler/         # HTTP 处理器
-│   │   ├── llm/             # LLM 适配层
-│   │   ├── repository/      # 数据访问层
-│   │   ├── service/         # 业务逻辑
-│   │   └── worker/          # 异步任务
-│   ├── pkg/                 # 公共包
-│   └── migrations/          # 数据库迁移
-├── frontend/                # React 前端
-│   └── src/
-│       ├── components/      # UI 组件
-│       ├── pages/           # 页面
-│       ├── services/        # API 调用
-│       └── stores/          # 状态管理
-├── deployments/             # 部署配置
-└── docker-compose.yml       # 容器编排
+## Docker 一键
+
+```bash
+docker compose up --build
 ```
 
-## 🔧 配置说明
+浏览器打开 http://localhost:5173 （前端容器映射 80→5173，并反代 `/api`）。
 
-### LLM 支持
+## 环境变量
 
-- **OpenAI**: GPT-4o, GPT-4-turbo
-- **Anthropic Claude**: Claude 3.5 Sonnet
-- **DeepSeek**: DeepSeek Chat
-- **Ollama**: 本地模型 (Llama, Mistral 等)
+见 `.env.example`：
 
-### CCF 领域分类
+- `LLM_API_KEY` / `LLM_BASE_URL` / `LLM_MODEL`：默认 DeepSeek Chat
+- `JWT_SECRET`
+- `GITHUB_TOKEN`：可选，提高 GitHub API 限额；失败则用种子数据
 
-1. 计算机体系结构/并行与分布计算/存储系统
-2. 计算机网络
-3. 网络与信息安全
-4. 软件工程/系统软件/程序设计语言
-5. 数据库/数据挖掘/内容检索
-6. 计算机科学理论
-7. 计算机图形学与多媒体
-8. 人工智能
-9. 人机交互与普适计算
-10. 交叉/综合/新兴
+## 架构（演示）
 
-## 📜 许可证
+```
+React (Vite :5173)
+  -> /api/v1 代理到 FastAPI :8000
+       -> SQLite + 本地 uploads/
+       -> OpenAI 兼容 LLM
+       -> GitHub API（失败回退种子）
+```
 
-本项目采用 [AGPL-3.0](LICENSE) 许可证。
+两周内刻意不做：Postgres/pgvector、MinIO、Redis/Asynq、Traefik、多 LLM 路由、完整 CCF 爬虫。
 
----
+## 许可证
+
+AGPL-3.0
